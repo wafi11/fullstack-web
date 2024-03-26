@@ -3,12 +3,16 @@ import getCurrentUser from './actions/getCurrentUser'
 import ClientOnly from './components/utils/ClientOnly'
 import Container from './components/utils/Container'
 import EmptyState from './components/main/EmptyState'
-import { getListings } from './actions/getListings'
-import ListingBox from './components/main/LiatingBox'
+import ListingCard from './components/main/ListingCard'
+import getListings, { ListingParams } from './actions/getListings'
 
-const Home = async() => {
+interface HomeProps {
+  searchParams: ListingParams
+};
+
+const Home = async({searchParams} : {searchParams : ListingParams}) => {
   const currentUser = await getCurrentUser()
-  const listing = await getListings()
+  const listing = await getListings(searchParams)
     if(listing?.length === 0){
       <ClientOnly>
       <EmptyState showReset/>
@@ -23,8 +27,7 @@ const Home = async() => {
           {
             listing?.map((list : any) => {
               return (
-                <ListingBox 
-                  onAction={() =>{}}
+                <ListingCard 
                   currentUser={currentUser}
                   key={list.id}
                   data={list}

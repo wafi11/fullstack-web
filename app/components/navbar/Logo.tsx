@@ -6,14 +6,11 @@ import { useRouter } from "next/navigation"
 const Logo = () => {
     const router = useRouter()
     return (
-        <Image 
+        <div 
             onClick={() => router.push('/')}
-            alt="logo" 
-            className="hidden md:block cursor-pointer"
-            height="100"
-            width="100"
-            src="/images/logoAirbnb.png"
-        />
+            className="text-3xl sm:text-3xl md:text-4xl font-bold text-green-500 uppercase">
+            NexTrips
+        </div>  
     )
 }
 

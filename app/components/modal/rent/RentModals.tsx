@@ -206,7 +206,7 @@ const RentModals = () => {
                     subtitle='Short and sweet works best!'
                 />
                 <Input
-                    id='Title'
+                    id='title'
                     label='Title'
                     disabled={isLoading}
                     register={register}

@@ -8,6 +8,12 @@ import ToastProvider from './components/providers/ToastProvider'
 import LoginModal from './components/modal/Login'
 import getCurrentUser, { getSession } from './actions/getCurrentUser'
 import RentModals from './components/modal/rent/RentModals'
+import SearchModal from './components/modal/SearchModal'
+import EmptyState from './components/main/EmptyState'
+import Button from './components/utils/button/Button'
+import Link from 'next/link'
+import Container from './components/utils/Container'
+import Heading from './components/utils/heading/Heading'
 
 const inter = Nunito({ subsets: ['latin'] })
 
@@ -26,16 +32,22 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientOnly>
-          <ToastProvider />
-          <RentModals />
-          <LoginModal />
-          <Register />
-          <Navbar currentUser={currentUser}/>
-        </ClientOnly>
-        <div className='pt-28 pb-20'>
-          {children}
-        </div>
+              <ClientOnly>
+                <ToastProvider />
+                <RentModals />
+                <SearchModal />
+                <LoginModal />
+                <Register />
+                {
+                  currentUser ? (
+                    <Navbar currentUser={currentUser}/>
+                  ) : null
+                }
+              </ClientOnly> 
+              <div className='pt-28 pb-20'>
+                {children}
+              </div> 
+        
         </body>
     </html>
   )

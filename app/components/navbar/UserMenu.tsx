@@ -10,6 +10,7 @@ import { User } from "@prisma/client"
 import { signOut } from "next-auth/react"
 import { SafeUser } from "../types"
 import useRentModals from "../hooks/RentModals"
+import { useRouter } from "next/navigation"
 
 interface NavbarProps {
     currentUser? : SafeUser | null
@@ -22,9 +23,12 @@ const UserMenu : React.FC<NavbarProps>  = ({
     const LoginModal = useLoginModal()
     const RentModals = useRentModals()
     const [nav,setNav] = useState(false)
-    console.log(nav);
+    const router = useRouter()
     
-
+    const handleLogOut = () => {
+        signOut()
+        router.push('/login')
+    }
     const handleOpen = useCallback(() => {
         setNav((value) => !value)
     },[])
@@ -64,16 +68,16 @@ const UserMenu : React.FC<NavbarProps>  = ({
                             {
                                currentUser  ? (
                                 <>
-                                    <MenuItem onClick={() => {}} label="My Trips" />
-                                    <MenuItem onClick={() => {}} label="My Favorites" />
-                                    <MenuItem onClick={() => {}} label="My Reservations" />
+                                    <MenuItem onClick={() => router.push('/trips')} label="My Trips" />
+                                    <MenuItem onClick={() => router.push('/favorites')} label="My Favorites" />
+                                    <MenuItem onClick={() => router.push('/reservations')} label="My Reservations" />
                                     <MenuItem onClick={() => {}} label="My Properties" />
-                                    <MenuItem onClick={() => signOut()} label="Logout" />
+                                    <MenuItem onClick={handleLogOut} label="Logout" />
                                 </>
                                ) : (
                                 <>
-                                    <MenuItem onClick={LoginModal.onOpen} label="Login" />
-                                    <MenuItem onClick={RegisterModal.onOpen} label="SignUp" />
+                                    <MenuItem onClick={() => router.push('/login')} label="Login" />
+                                    <MenuItem onClick={() => router.push('register')} label="SignUp" />
                                 </>
                                )
                             }

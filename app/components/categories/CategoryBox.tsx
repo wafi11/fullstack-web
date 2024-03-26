@@ -4,14 +4,13 @@ import React, { useCallback } from 'react'
 import { IconType } from 'react-icons'
 interface CategoryBoxProps{
     label : string,
-    // description : String
+    // description : string
     icon : IconType
     teken? :boolean
 }
 
 const CategoryBox : React.FC<CategoryBoxProps> = ({
     label,
-    // description,
     icon : Icon,
     teken 
 }) => {

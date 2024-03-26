@@ -6,9 +6,7 @@ const formatedCountry = countries.map((country) => ({
     label : country.name.common,
     latIng : country.latlng,
     region : country.region
-
-}
-))
+}))
 
 const useContries = () => {
     const getAll = () => formatedCountry

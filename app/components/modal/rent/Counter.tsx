@@ -7,21 +7,17 @@ interface CounterProps {
     value : number
     onChange : (value : number ) => void
 }
-
 const Counter : React.FC<CounterProps> = ({
     title,
     subtitle,
     value,
     onChange
 }) => {
-
     const add = useCallback(() => {
         onChange(value + 1)
     },[value,onChange])
     const reduce = useCallback(() => {
-        if(value === 1){
-            return 
-        }
+        if(value === 1) return
         onChange(value - 1)
     },[onChange,value])
 
